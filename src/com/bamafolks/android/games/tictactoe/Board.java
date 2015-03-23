@@ -89,6 +89,8 @@ public class Board extends View {
         Paint selected = new Paint();
         selected.setColor(getResources().getColor(R.color.board_selected));
         canvas.drawRect(selRect, selected);
+
+
     }
 
     private void select(int x, int y) {
@@ -116,12 +118,14 @@ public class Board extends View {
     public void setSelectedCell(String symbol) {
         if (game.setCellIfValid(selX, selY, symbol)) {
             invalidate();
-            //if (!game.isGameOver())
-            game.doComputerMove();
+            if (!game.isGameOver())
+                game.doComputerMove();
         } else {
             Log.d(getClass().getSimpleName(), "setSelectedCell: invalid selection");
             startAnimation(AnimationUtils.loadAnimation(game, R.anim.shake));
         }
     }
+
+
 
 }
