@@ -29,6 +29,7 @@ public class Game extends Activity {
     public static final String SYMBOL_SPACE = " ";
     public static final String SYMBOL_X = "X";
     public static final String SYMBOL_O = "O";
+    static int count = 0;
 
     private String playerSymbol;
     private String computerSymbol;
@@ -104,6 +105,7 @@ public class Game extends Activity {
 
     private int[] findWinner() {
         int[] winner = null;
+        count++;
         for (int x = 1; x < 5; x++) {
             for (int y = 1; y < 5; y++) {
 
@@ -122,6 +124,15 @@ public class Game extends Activity {
                             + "', cell[" + combo[1] + "] = '" + s2 + "', cell["
                             + combo[2] + "] = '" + s3 + "'");*/
 
+                    if (count == 36) {
+                        if (board.countX > board.count0) {
+                            showEndOfGame("Congratulations!  You won this game!");
+                        } else if (board.countX != board.count0) {
+                            showEndOfGame("Opps, the computer won this game.");
+                        } else {
+                            showEndOfGame("Nobody won!  Better luck next time.");
+                        }
+                    }
                     if (!s1.equals(SYMBOL_SPACE) && !s2.equals(SYMBOL_SPACE)
                             && !s3.equals(SYMBOL_SPACE))
                         if (s1.equals(s2) && s2.equals(s3)) {
@@ -135,6 +146,13 @@ public class Game extends Activity {
                                 //board.DrawLine(winningCombos[i],x,y);
                                 board.Lines.add(new Line(MapToArray(x, y, combo[0]), MapToArray(x, y, combo[2])));
                                 board.invalidate();
+
+                                if (s1.equals(playerSymbol)) {
+                                    board.countX++;
+                                } else {
+                                    board.count0++;
+                                }
+
                             }
                             //break;
                         }

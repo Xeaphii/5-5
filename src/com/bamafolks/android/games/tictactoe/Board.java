@@ -23,6 +23,7 @@ public class Board extends View {
     int offset = 200;
     private final Rect selRect = new Rect();
     List<Line> Lines;
+    public static int countX = 0, count0 = 0;
 
     public Board(Context context) {
         super(context);
@@ -55,6 +56,7 @@ public class Board extends View {
         background.setColor(getResources().getColor(R.color.board_background));
         canvas.drawRect(0, 0, getWidth(), getHeight(), background);
 
+
         // Draw the board
         Paint dark = new Paint();
         dark.setColor(getResources().getColor(R.color.board_dark));
@@ -82,6 +84,9 @@ public class Board extends View {
         FontMetrics fm = foreground.getFontMetrics();
         float x = width / 2;
         float y = height / 2 - (fm.ascent + fm.descent) / 2;
+        canvas.drawText("X : " + countX, width + x, y, foreground);
+        canvas.drawText("0 : " + count0, 4 * width + x, y, foreground);
+
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 canvas.drawText(this.game.getCellString(i, j), i * width + x, j * height + y + offset, foreground);
