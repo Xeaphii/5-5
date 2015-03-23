@@ -128,7 +128,7 @@ public class Game extends Activity {
                             //board.DrawLine(winningCombos[i],x,y);
                             board.Lines.add(new Line(MapToArray(x, y, combo[0]),MapToArray(x, y, combo[2])));
                             board.invalidate();
-                            break;
+                            //break;
                         }
                 }
             }

@@ -94,15 +94,29 @@ public class Board extends View {
         selected.setColor(getResources().getColor(R.color.board_selected));
         Paint LineWin = new Paint();
         LineWin.setColor(getResources().getColor(R.color.black));
-        LineWin.setStrokeWidth(6);
+        LineWin.setStrokeWidth(9);
         canvas.drawRect(selRect, selected);
         for (int i = 0; i < Lines.size(); i++) {
             Line line = Lines.get(i);
-            canvas.drawLine((line.getStartIndex() % 6) * width
-                    , (line.getStartIndex() / 6) * height + offset,
-                    (line.getEndIndex() % 6) * width + width,
-                    (line.getEndIndex() / 6) * height + height + offset,
-                    hilite);
+            if ((line.getStartIndex() / 6) == (line.getEndIndex() / 6)) {
+                canvas.drawLine((line.getStartIndex() % 6) * width
+                        , ((line.getStartIndex() / 6) - 1) * height+height + height / 2 + offset,
+                        (line.getEndIndex() % 6) * width + width,
+                        ((line.getStartIndex() / 6) - 1) * height+height + height / 2 + offset,
+                        LineWin);
+            } else if ((line.getStartIndex() % 6) == (line.getEndIndex() % 6)) {
+                canvas.drawLine(((line.getStartIndex() % 6) - 1) * width+width + width / 2
+                        , (line.getStartIndex() / 6) * height + offset,
+                        ((line.getEndIndex() % 6) - 1) * width + width / 2+width,
+                        (line.getEndIndex() / 6) * height + height + offset,
+                        LineWin);
+            } else {
+                canvas.drawLine((line.getStartIndex() % 6) * width
+                        , (line.getStartIndex() / 6) * height + offset,
+                        (line.getEndIndex() % 6) * width + width,
+                        (line.getEndIndex() / 6) * height + height + offset,
+                        LineWin);
+            }
         }
 
     }
