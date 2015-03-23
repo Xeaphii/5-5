@@ -34,12 +34,13 @@ public class Game extends Activity {
     private String computerSymbol;
 
     SecureRandom random = new SecureRandom();
+    boolean[] IsUsed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(getClass().getSimpleName(), "onCreate");
-
+        IsUsed = new boolean[36];
         int first = getIntent().getIntExtra(FIRST_MOVE, RANDOM_FIRST);
         cells = getCells(first);
 
@@ -124,10 +125,17 @@ public class Game extends Activity {
                     if (!s1.equals(SYMBOL_SPACE) && !s2.equals(SYMBOL_SPACE)
                             && !s3.equals(SYMBOL_SPACE))
                         if (s1.equals(s2) && s2.equals(s3)) {
-                            winner = combo;
-                            //board.DrawLine(winningCombos[i],x,y);
-                            board.Lines.add(new Line(MapToArray(x, y, combo[0]),MapToArray(x, y, combo[2])));
-                            board.invalidate();
+                            if (!IsUsed[MapToArray(x, y, combo[0])] &&
+                                    !IsUsed[MapToArray(x, y, combo[1])] &&
+                                    !IsUsed[MapToArray(x, y, combo[2])]) {
+                                IsUsed[MapToArray(x, y, combo[0])] = true;
+                                IsUsed[MapToArray(x, y, combo[1])] = true;
+                                IsUsed[MapToArray(x, y, combo[2])] = true;
+                                winner = combo;
+                                //board.DrawLine(winningCombos[i],x,y);
+                                board.Lines.add(new Line(MapToArray(x, y, combo[0]), MapToArray(x, y, combo[2])));
+                                board.invalidate();
+                            }
                             //break;
                         }
                 }
