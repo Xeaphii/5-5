@@ -100,20 +100,26 @@ public class Board extends View {
             Line line = Lines.get(i);
             if ((line.getStartIndex() / 6) == (line.getEndIndex() / 6)) {
                 canvas.drawLine((line.getStartIndex() % 6) * width
-                        , ((line.getStartIndex() / 6) - 1) * height+height + height / 2 + offset,
+                        , ((line.getStartIndex() / 6) - 1) * height + height + height / 2 + offset,
                         (line.getEndIndex() % 6) * width + width,
-                        ((line.getStartIndex() / 6) - 1) * height+height + height / 2 + offset,
+                        ((line.getStartIndex() / 6) - 1) * height + height + height / 2 + offset,
                         LineWin);
             } else if ((line.getStartIndex() % 6) == (line.getEndIndex() % 6)) {
-                canvas.drawLine(((line.getStartIndex() % 6) - 1) * width+width + width / 2
+                canvas.drawLine(((line.getStartIndex() % 6) - 1) * width + width + width / 2
                         , (line.getStartIndex() / 6) * height + offset,
-                        ((line.getEndIndex() % 6) - 1) * width + width / 2+width,
+                        ((line.getEndIndex() % 6) - 1) * width + width / 2 + width,
                         (line.getEndIndex() / 6) * height + height + offset,
                         LineWin);
-            } else {
+            } else if ((line.getStartIndex() % 6) < (line.getEndIndex() % 6)) {
                 canvas.drawLine((line.getStartIndex() % 6) * width
                         , (line.getStartIndex() / 6) * height + offset,
                         (line.getEndIndex() % 6) * width + width,
+                        (line.getEndIndex() / 6) * height + height + offset,
+                        LineWin);
+            } else {
+                canvas.drawLine((line.getStartIndex() % 6) * width + width
+                        , (line.getStartIndex() / 6) * height + offset,
+                        (line.getEndIndex() % 6) * width,
                         (line.getEndIndex() / 6) * height + height + offset,
                         LineWin);
             }
