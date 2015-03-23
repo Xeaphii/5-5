@@ -1,7 +1,5 @@
 package com.bamafolks.android.games.tictactoe;
 
-import java.security.SecureRandom;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,6 +9,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
+
+import java.security.SecureRandom;
 
 public class Game extends Activity {
 
@@ -150,8 +150,8 @@ public class Game extends Activity {
 					prefs.getString(PREF_STATE, " , , , , , , , , "), ",");
 		}
 
-		String[] grid = new String[9];
-		for (int i = 0; i < 9; i++)
+		String[] grid = new String[36];
+		for (int i = 0; i < 36; i++)
 			grid[i] = SYMBOL_SPACE;
 
 		switch (first) {
@@ -177,7 +177,7 @@ public class Game extends Activity {
 	}
 
 	public boolean setCellIfValid(int x, int y, String symbol) {
-		int index = (y * 3) + x;
+		int index = (y * 6) + x;
 		if (!cells[index].equals(SYMBOL_SPACE))
 			return false;
 		cells[index] = symbol;
@@ -193,7 +193,7 @@ public class Game extends Activity {
 	}
 
 	public String getCellString(int i, int j) {
-		int index = (j * 3) + i;
+		int index = (j * 6) + i;
 		return cells[index];
 	}
 
