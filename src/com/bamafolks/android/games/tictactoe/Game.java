@@ -57,6 +57,7 @@ public class Game extends Activity {
         for (int i = 0; i < cells.length; i++) {
             if (cells[i].equals(SYMBOL_SPACE)) {
                 cells[i] = computerSymbol;
+
                 break;
             }
         }
@@ -68,30 +69,32 @@ public class Game extends Activity {
     public boolean isGameOver() {
         int[] winner = findWinner();
 
-        if (winner != null) {
-            if (cells[winner[0]].equals(playerSymbol)) {
-                showEndOfGame("Congratulations!  You won this game!");
-                return true;
-            } else {
-                showEndOfGame("Opps, the computer won this game.");
-                return true;
-            }
-        } else {
-
-            boolean tie = true;
-            for (int i = 0; i < cells.length; i++)
-                if (cells[i].equals(SYMBOL_SPACE)) {
-                    tie = false;
-                    break;
-                }
-
-            if (tie) {
-                showEndOfGame("Nobody won!  Better luck next time.");
-                return true;
-            }
-        }
-
         return false;
+
+//        if (winner != null) {
+//            if (cells[winner[0]].equals(playerSymbol)) {
+//                showEndOfGame("Congratulations!  You won this game!");
+//                return true;
+//            } else {
+//                showEndOfGame("Opps, the computer won this game.");
+//                return true;
+//            }
+//        } else {
+//
+//            boolean tie = true;
+//            for (int i = 0; i < cells.length; i++)
+//                if (cells[i].equals(SYMBOL_SPACE)) {
+//                    tie = false;
+//                    break;
+//                }
+//
+//            if (tie) {
+//                showEndOfGame("Nobody won!  Better luck next time.");
+//                return true;
+//            }
+//        }
+
+//        return false;
     }
 
     private int[][] winningCombos = new int[][]{{0, 1, 2}, {0, 3, 6},
@@ -123,6 +126,8 @@ public class Game extends Activity {
                         if (s1.equals(s2) && s2.equals(s3)) {
                             winner = combo;
                             //board.DrawLine(winningCombos[i],x,y);
+                            board.Lines.add(new Line(MapToArray(x, y, combo[0]),MapToArray(x, y, combo[2])));
+                            board.invalidate();
                             break;
                         }
                 }

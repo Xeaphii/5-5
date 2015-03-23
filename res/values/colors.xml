@@ -7,5 +7,6 @@
     <color name="board_dark">#6456648f</color>
     <color name="board_foreground">#ff000000</color>
     <color name="board_selected">#64ff8000</color>
+    <color name="black">#64000000</color>
     
 </resources>

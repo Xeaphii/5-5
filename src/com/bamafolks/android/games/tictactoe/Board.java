@@ -11,6 +11,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Board extends View {
     private final Game game;
     private float width;
@@ -19,12 +22,13 @@ public class Board extends View {
     private int selY;
     int offset = 200;
     private final Rect selRect = new Rect();
+    List<Line> Lines;
 
     public Board(Context context) {
         super(context);
         this.game = (Game) context;
         setFocusable(true);
-
+        Lines = new ArrayList<Line>();
         setFocusableInTouchMode(true);
     }
 
@@ -88,8 +92,18 @@ public class Board extends View {
         Log.d(getClass().getSimpleName(), "selRect=" + selRect);
         Paint selected = new Paint();
         selected.setColor(getResources().getColor(R.color.board_selected));
+        Paint LineWin = new Paint();
+        LineWin.setColor(getResources().getColor(R.color.black));
+        LineWin.setStrokeWidth(6);
         canvas.drawRect(selRect, selected);
-
+        for (int i = 0; i < Lines.size(); i++) {
+            Line line = Lines.get(i);
+            canvas.drawLine((line.getStartIndex() % 6) * width
+                    , (line.getStartIndex() / 6) * height + offset,
+                    (line.getEndIndex() % 6) * width + width,
+                    (line.getEndIndex() / 6) * height + height + offset,
+                    hilite);
+        }
 
     }
 
@@ -125,7 +139,6 @@ public class Board extends View {
             startAnimation(AnimationUtils.loadAnimation(game, R.anim.shake));
         }
     }
-
 
 
 }
