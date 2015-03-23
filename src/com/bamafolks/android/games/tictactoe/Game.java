@@ -62,7 +62,7 @@ public class Game extends Activity {
 		}
 
 		board.invalidate();
-		isGameOver();
+		//isGameOver();
 	}
 
 	public boolean isGameOver() {

@@ -103,8 +103,11 @@ public class Board extends View {
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_DOWN)
             return super.onTouchEvent(event);
+        if (event.getY() <= offset)
+            return true;
 
-        select((int) (event.getX() / width), (int) (event.getY() - offset / height));
+
+        select((int) (event.getX() / width), (int) ((event.getY() - offset) / height));
         setSelectedCell(this.game.getPlayerSymbol());
         Log.d(getClass().getSimpleName(), "onTouchEvent: x " + selX + ", y " + selY);
         return true;
@@ -113,8 +116,8 @@ public class Board extends View {
     public void setSelectedCell(String symbol) {
         if (game.setCellIfValid(selX, selY, symbol)) {
             invalidate();
-            if (!game.isGameOver())
-                game.doComputerMove();
+            //if (!game.isGameOver())
+            game.doComputerMove();
         } else {
             Log.d(getClass().getSimpleName(), "setSelectedCell: invalid selection");
             startAnimation(AnimationUtils.loadAnimation(game, R.anim.shake));
