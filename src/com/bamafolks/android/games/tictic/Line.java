@@ -1,4 +1,4 @@
-package com.bamafolks.android.games.tictactoe;
+package com.bamafolks.android.games.tictic;
 
 /**
  * Created by Sunny on 3/23/2015.

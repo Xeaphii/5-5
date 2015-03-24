@@ -1,4 +1,4 @@
-package com.bamafolks.android.games.tictactoe;
+package com.bamafolks.android.games.tictic;
 
 import android.content.Context;
 import android.os.Bundle;

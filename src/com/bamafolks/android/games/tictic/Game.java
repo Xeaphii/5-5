@@ -1,4 +1,4 @@
-package com.bamafolks.android.games.tictactoe;
+package com.bamafolks.android.games.tictic;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -29,7 +29,7 @@ public class Game extends Activity {
     public static final String SYMBOL_SPACE = " ";
     public static final String SYMBOL_X = "X";
     public static final String SYMBOL_O = "O";
-    static int count = 0;
+
 
     private String playerSymbol;
     private String computerSymbol;
@@ -62,10 +62,27 @@ public class Game extends Activity {
 
                 break;
             }
+            if (i == cells.length - 1)
+                ShowResult();
         }
 
         board.invalidate();
         isGameOver();
+    }
+
+    void ShowResult() {
+        board.countX = 0;
+        board.count0 = 0;
+
+        if (board.countX > board.count0) {
+            showEndOfGame("Congratulations!  You won this game!");
+        } else if (board.countX != board.count0) {
+            showEndOfGame("Opps, the computer won this game.");
+        } else {
+            showEndOfGame("Nobody won!  Better luck next time.");
+        }
+
+
     }
 
     public boolean isGameOver() {
@@ -105,7 +122,7 @@ public class Game extends Activity {
 
     private int[] findWinner() {
         int[] winner = null;
-        count++;
+
         for (int x = 1; x < 5; x++) {
             for (int y = 1; y < 5; y++) {
 
@@ -124,15 +141,7 @@ public class Game extends Activity {
                             + "', cell[" + combo[1] + "] = '" + s2 + "', cell["
                             + combo[2] + "] = '" + s3 + "'");*/
 
-                    if (count == 36) {
-                        if (board.countX > board.count0) {
-                            showEndOfGame("Congratulations!  You won this game!");
-                        } else if (board.countX != board.count0) {
-                            showEndOfGame("Opps, the computer won this game.");
-                        } else {
-                            showEndOfGame("Nobody won!  Better luck next time.");
-                        }
-                    }
+
                     if (!s1.equals(SYMBOL_SPACE) && !s2.equals(SYMBOL_SPACE)
                             && !s3.equals(SYMBOL_SPACE))
                         if (s1.equals(s2) && s2.equals(s3)) {
@@ -260,6 +269,8 @@ public class Game extends Activity {
         if (!cells[index].equals(SYMBOL_SPACE))
             return false;
         cells[index] = symbol;
+
+
         return true;
     }
 
